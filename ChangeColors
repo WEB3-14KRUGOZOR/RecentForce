@@ -1,0 +1,40 @@
+    class Register {
+        private static $data = [];
+        public static function set ($key, $value) {
+            self::$data[$key] = $value;
+
+        }
+        public static function get ($key) {
+            return array_key_exists($key, self::$data) ? self::$data[$key] : null;
+        }
+    }
+
+    function getHTML () {
+        $html  = "
+            <html>
+            <head><title>".Register::get('title')."</title></head>
+<body bgcolor='".Register::get('bgcolor')."'>
+
+</body>
+</html>
+        ";
+        return $html;
+    }
+
+    function getUserConfig () {
+        getTitle ();
+        getBackGround ();
+    }
+
+    function getTitle () {
+        Register::set('title', "Title_".rand(1, 100));
+    }
+    function getBackGround () {
+        $colors = ['grey', 'black', 'brown', 'aqua', 'orange', 'red'];
+        $color = $colors[rand(0, 5)];
+        Register::set('bgcolor', $color);
+    }
+
+
+
+echo  getHTML();
